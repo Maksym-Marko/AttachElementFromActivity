@@ -20,6 +20,9 @@ const MX_TABLE_SLUG = 'attach_element_activity';
 // CRUD file
 require_once plugin_dir_path( __FILE__ ) . 'inc/crud.php';
 
+// helpers
+require_once plugin_dir_path( __FILE__ ) . 'inc/helpers.php';
+
 // main class
 class AttachElementFromActivity
 {
@@ -43,6 +46,15 @@ class AttachElementFromActivity
 
 	}
 
+	/**************************
+	* filter for activity loop
+	***************************/
+	public function set_filter_exclude_attach_items(){
+
+		mx_set_filter_exclude();
+
+	}
+
 	/**********************
 	* functions action
 	***********************/
@@ -59,8 +71,18 @@ class AttachElementFromActivity
 	// add button in activity item
 	public function add_button_in_activity_item() {
 
-		// BuddyPress hook
-		add_action( 'bp_activity_entry_meta', array( $this, 'create_attach_button' ), 1 );
+		add_action('plugins_loaded', function() {
+
+		  $user_meta = get_userdata( get_current_user_id() );
+
+			$user_roles = $user_meta->roles;
+
+			if( $user_roles[0] == 'administrator' ){
+			    // BuddyPress hook
+				add_action( 'bp_activity_entry_meta', array( $this, 'create_attach_button' ), 1 );
+			}
+
+		});
 		
 	}
 
@@ -78,7 +100,7 @@ class AttachElementFromActivity
 
 	// create place begin activity loop
 	public function create_place_begin_activity_loop() {
-		add_action( 'bp_before_directory_activity_list', array( $this, 'body_for_attach_item' ) );
+		add_action( 'bp_before_directory_activity_list', array( $this, 'body_for_attach_item' ), 20 );
 	}
 
 		// body fot attach activity item
@@ -92,7 +114,8 @@ class AttachElementFromActivity
 
 // initialize
 if ( class_exists( 'AttachElementFromActivity' ) ) {
-	$attachElementFromActivity = new AttachElementFromActivity();	
+	$attachElementFromActivity = new AttachElementFromActivity();
+	$attachElementFromActivity->set_filter_exclude_attach_items();
 }
 
 // require basic functions

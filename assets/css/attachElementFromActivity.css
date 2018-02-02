@@ -10,3 +10,41 @@
 #attachItemActivityWrap .mx-attach_form{
 	display: none;
 }
+#attachItemActivityWrap .load-newest{
+	display: none !important;
+}
+#attachItemActivityWrap h2{
+	text-align: center;
+}
+
+/*activity list*/
+#buddypress .activity#attachItemActivityWrap ul li{
+	border: none;
+    padding: 15px 0;
+    margin: 0;
+    position: relative;
+    list-style: none;
+    background: #fff;
+    padding: 14px;
+    display: inline-block;
+    width: 100%;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+    overflow: visible;
+}
+#buddypress .activity#attachItemActivityWrap ul li li{
+	box-shadow: none;
+}
+#buddypress .activity#attachItemActivityWrap ul{
+    width: 100%;
+    list-style: none;
+    clear: both;
+    margin: 0;
+    padding: 0    
+}
+#buddypress .activity#attachItemActivityWrap > ul{
+	margin-bottom: 20px;
+}
