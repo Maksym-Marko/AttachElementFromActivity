@@ -1,0 +1,1 @@
+console.log( 'Attach an element to an activity' );

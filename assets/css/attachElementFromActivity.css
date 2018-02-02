@@ -1,0 +1,12 @@
+.mx-deattach_form{
+	display: none;
+}
+.mx-attach_form{
+	display: block;
+}
+#attachItemActivityWrap .mx-deattach_form{
+	display: block;
+}
+#attachItemActivityWrap .mx-attach_form{
+	display: none;
+}
