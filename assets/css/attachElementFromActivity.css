@@ -39,12 +39,68 @@
 	box-shadow: none;
 }
 #buddypress .activity#attachItemActivityWrap ul{
-    width: 100%;
     list-style: none;
     clear: both;
     margin: 0;
-    padding: 0    
+    padding: 0 
+}
+#buddypress .activity#attachItemActivityWrap > ul{
+    width: 100%;   
 }
 #buddypress .activity#attachItemActivityWrap > ul{
 	margin-bottom: 20px;
+}
+#buddypress .activity#attachItemActivityWrap div.activity-meta{
+	width: 100%;
+	clear: both;
+}
+#buddypress .activity#attachItemActivityWrap .mx-ulike_box ul li{
+	padding: 0px;
+    margin: 5px 4px;    
+    -moz-border-radius: 0;
+    -o-border-radius: 0;
+    width: auto;
+    float: left;
+    border-radius: 50%;
+    overflow: hidden;
+}
+#buddypress .activity#attachItemActivityWrap .mx-ulike_box ul li:first-child{
+	padding: 0px 4px !important;
+	border-radius: 0;
+	text-align: center;
+    width: 100%;
+}
+
+/*button*/
+.mx-attach_forms_wrap{
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: -4px;
+	right: 0px;
+}
+#attachItemActivityWrap .mx-attach_forms_wrap{
+    top: 12px;
+    right: 12px;
+}
+.mx-attach_forms_wrap button{
+	background: none;
+	border: none;
+	color: #ddd;
+	padding: 0px;
+	margin: 0px;
+	font-size: 16px;
+	text-shadow: none;
+	outline: none;
+	-webkit-transition: 0.9s all ease;
+    transition: 0.9s all ease;
+}
+.mx-attach_forms_wrap button:hover,
+.mx-attach_forms_wrap button:focus,
+.mx-attach_forms_wrap button:visited{
+	background: none;
+	border: none;
+	color: #44345e;
+	-webkit-transition: 0.9s all ease;
+    transition: 0.9s all ease;
 }

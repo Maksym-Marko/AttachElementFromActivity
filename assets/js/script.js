@@ -1,1 +1,1 @@
-console.log( 'Attach an element to an activity' );
+//console.log( 'Attach an element to an activity' );

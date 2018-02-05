@@ -8,21 +8,9 @@ class AttachmentItems
 	private $table_name_slug = MX_TABLE_SLUG;
 
 	public function listItems()
-	{ 
+	{
 		global $wpdb;
-
-		// $table_name = $wpdb->prefix . $this->table_name_slug;
-
-		// $attachment_elements = $wpdb->get_results( "SELECT attach_id FROM " . $table_name . " ORDER By id DESC" );
-
-		// $array_attachment_elements = array();
-
-		// foreach( $attachment_elements as $attach_element ){
-		// 	$array_attachment_elements[] = $attach_element->attach_id;
-		// }
-
-		// $array_attachment_elements = implode( ',', $array_attachment_elements );
-
+		
 		$array_attachment_elements = mx_list_attachment_items( $this->table_name_slug );
 
 		?>
@@ -38,7 +26,12 @@ class AttachmentItems
 
 					<!--attach-->
 					<?php bp_get_template_part( 'activity/entry' ); ?>
-					<?php //include('attach_boby.php'); ?>
+					
+					<?php
+					/*
+					* If you want to customize attachment elements, you can edit this file. After power on.
+					*/
+					//include('attach_boby.php'); ?>
 
 				<?php endwhile; ?>
 

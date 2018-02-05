@@ -6,7 +6,8 @@
 class AttachButton
 {	
 
-	public function create_form() {
+	public function create_form()
+	{
 
 		$new_crud = new CrudAttachmentItems();
 
@@ -39,15 +40,17 @@ class AttachButton
 
 		}?>
 		
-		<form method="post" class="mx-attach_form" id="form_attachment-<?=bp_get_activity_id();?>">
-			<input type="hidden" name="attach_id" value="<?=bp_get_activity_id();?>">
-			<button type="submit" class="mx-attach_submit" name="<?=$name_attach_button?>">Закрепить запись</button>
-	    </form>
+		<div class="mx-attach_forms_wrap">
+			<form method="post" class="mx-attach_form" id="form_attachment-<?=bp_get_activity_id();?>">
+				<input type="hidden" name="attach_id" value="<?=bp_get_activity_id();?>">
+				<button type="submit" class="mx-attach_submit" title="Закрепить" name="<?=$name_attach_button?>"><i class="fas fa-object-group"></i></button>
+		    </form>
 
-	    <form method="post" class="mx-deattach_form" id="form_deattachment-<?=bp_get_activity_id();?>">
-			<input type="hidden" name="deattach_id" value="<?=bp_get_activity_id();?>">
-			<button type="submit" class="mx-deattach_submit" name="<?=$name_deattach_button?>">Открепить запись</button>
-	    </form>
+		    <form method="post" class="mx-deattach_form" id="form_deattachment-<?=bp_get_activity_id();?>">
+				<input type="hidden" name="deattach_id" value="<?=bp_get_activity_id();?>">
+				<button type="submit" class="mx-deattach_submit" title="Открепить" name="<?=$name_deattach_button?>"><i class="far fa-object-ungroup"></i></button>
+		    </form>
+		</div>
 
 	<?php }
 

@@ -3,18 +3,13 @@
 * @package AttachElementFromActivity
 */
 
-/**
-*	Trigger this file on Plugin uninstall
-*
-*/
-
-// Clear Database 
 class BasicFunctions
 {
 
 	private static $table_name_slug = MX_TABLE_SLUG;
 
-	public static function activate() {
+	public static function activate()
+	{
 
 		// create table
 		global $wpdb;
@@ -46,7 +41,8 @@ class BasicFunctions
 		flush_rewrite_rules();
 	}
 
-	public static function deactivate() {
+	public static function deactivate()
+	{
 
 		// CODE...
 
@@ -54,20 +50,12 @@ class BasicFunctions
 		flush_rewrite_rules();
 	}
 
-	public static function uninstall() {
+	public static function uninstall()
+	{
 
-		if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-			die;
+		if ( __FILE__ != WP_UNINSTALL_PLUGIN ) {			
+			return;
 		}
-
-		// remove table
-		global $wpdb;
-
-		$table_name = $wpdb->prefix . self::$table_name_slug;
-
-		$sql = "DROP TABLE IF EXISTS $table_name";
-
-		$wpdb->query($sql);
 		
 	}
 }

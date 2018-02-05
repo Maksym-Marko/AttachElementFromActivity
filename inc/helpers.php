@@ -1,4 +1,8 @@
 <?php
+/**
+* @package AttachElementFromActivity
+*/
+
 function mx_list_attachment_items( $table_slug ) {
 
 	global $wpdb;
@@ -22,19 +26,13 @@ function mx_list_attachment_items( $table_slug ) {
 /**************************
 * filter for activity loop
 ***************************/
-function mx_set_filter_exclude(){	
+function my_bp_activities_exclude_activity_item( $retval ) {
+	    
+    $exclude_items = mx_list_attachment_items( MX_TABLE_SLUG ); 
 
-	add_filter( 'bp_after_has_activities_parse_args', 'my_bp_activities_exclude_activity_item' );
+	$exclude_items_arr = explode(",", $exclude_items);
 
+    $retval['exclude'] = $exclude_items_arr;
+ 
+    return $retval;
 }
-
-	function my_bp_activities_exclude_activity_item( $retval ) {
-		    
-	    $exclude_items = mx_list_attachment_items( MX_TABLE_SLUG ); 
-
-		$exclude_items_arr = explode(",", $exclude_items);
-
-	    $retval['exclude'] = $exclude_items_arr;
-	 
-	    return $retval;
-	}

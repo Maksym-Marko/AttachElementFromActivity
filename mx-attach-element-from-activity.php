@@ -5,11 +5,11 @@
 
 /*
 Plugin Name: Attach an element to an activity
-Plugin URI: ...
-Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis ex, in laboriosam. Aspernatur ea deleniti quae, ut, sunt, esse modi earum cum autem, illo sequi dolores minus vitae inventore veritatis.
-Author: Max
+Plugin URI: https://github.com/Maxim-us/AttachElementFromActivity
+Description: Plugin for BuddyPress. Allows you to attachment any item from the activity loop to the beginning. As in Vkontakte.
+Author: Marko Maksym
 Version: 1.0
-Author URI: ...
+Author URI: https://github.com/Maxim-us
 */
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
@@ -51,7 +51,7 @@ class AttachElementFromActivity
 	***************************/
 	public function set_filter_exclude_attach_items(){
 
-		mx_set_filter_exclude();
+		add_filter( 'bp_after_has_activities_parse_args', 'my_bp_activities_exclude_activity_item' );
 
 	}
 
@@ -67,7 +67,6 @@ class AttachElementFromActivity
 
 	}
 
-	/* tools */
 	// add button in activity item
 	public function add_button_in_activity_item() {
 
@@ -128,4 +127,4 @@ register_activation_hook( __FILE__, array( 'BasicFunctions', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'BasicFunctions', 'deactivate' ) );
 
 // uninstall
-// register_uninstall_hook( __FILE__, array( 'BasicFunctions', 'uninstall' ) );
+register_uninstall_hook( __FILE__, array( 'BasicFunctions', 'uninstall' ) );

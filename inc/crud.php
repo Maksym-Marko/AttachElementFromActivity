@@ -8,7 +8,8 @@ class CrudAttachmentItems
 
 	private $table_name_slug = MX_TABLE_SLUG;
 	
-	public function item_add( $attach_id ) {
+	public function item_add( $attach_id )
+	{
 
 		global $wpdb;
 
@@ -32,7 +33,8 @@ class CrudAttachmentItems
 
 	}
 
-	public function item_delete( $de_attach_id ){
+	public function item_delete( $de_attach_id )
+	{
 
 		global $wpdb;
 
