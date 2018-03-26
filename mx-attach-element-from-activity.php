@@ -8,7 +8,7 @@ Plugin Name: Attach an element to an activity
 Plugin URI: https://github.com/Maxim-us/AttachElementFromActivity
 Description: Plugin for BuddyPress. Allows you to attachment any item from the activity loop to the beginning. As in Vkontakte.
 Author: Marko Maksym
-Version: 1.0
+Version: 1.1
 Author URI: https://github.com/Maxim-us
 */
 
@@ -23,16 +23,24 @@ require_once plugin_dir_path( __FILE__ ) . 'inc/crud.php';
 // helpers
 require_once plugin_dir_path( __FILE__ ) . 'inc/helpers.php';
 
+// create button
+require_once plugin_dir_path( __FILE__ ) . 'inc/create_attach_button.php';
+
 // main class
 class AttachElementFromActivity
 {
 
 	function __construct() {
+		
 		$this->add_button_in_activity_item();
+
 		$this->create_place_begin_activity_loop();
 
 		// register function
 		$this->register();
+
+		// watch to the $_POST
+		$this->watch_post();
 	}	
 
 	/*******************
@@ -42,6 +50,7 @@ class AttachElementFromActivity
 	public function register() {
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
+
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ) );
 
 	}
@@ -63,7 +72,7 @@ class AttachElementFromActivity
 
 		wp_enqueue_style( 'attachElementFromActivityStyle', plugins_url( '/assets/css/attachElementFromActivity.css?' . time(), __FILE__ ) );
 
-		wp_enqueue_script( 'attachElementFromActivityScript', plugins_url( '/assets/js/script.js', __FILE__ ) );
+		wp_enqueue_script( 'attachElementFromActivityScript', plugins_url( '/assets/js/script.js?v=' . time(), __FILE__ ), array( 'jquery' ) );
 
 	}
 
@@ -86,20 +95,18 @@ class AttachElementFromActivity
 	}
 
 		// create button for attach
-		public function create_attach_button() { ?>
+		public function create_attach_button() {
 
-			<?php require_once plugin_dir_path( __FILE__ ) . 'inc/create_attach_button.php'; ?>
+			$new_button_attach = new AttachButton();
 
-			<?php
-				$new_button_attach = new AttachButton();
-				$new_button_attach->create_form();
-			?>
-
-		<?php }
+			$new_button_attach->create_form();
+		}
 
 	// create place begin activity loop
 	public function create_place_begin_activity_loop() {
+
 		add_action( 'bp_before_directory_activity_list', array( $this, 'body_for_attach_item' ), 20 );
+
 	}
 
 		// body fot attach activity item
@@ -109,12 +116,24 @@ class AttachElementFromActivity
 
 		<?php }
 
+	public function watch_post()
+	{
+
+		$new_class_attach = new AttachButton();
+
+		$new_class_attach->get_post_arr();
+
+	}
+
 }
 
 // initialize
 if ( class_exists( 'AttachElementFromActivity' ) ) {
+
 	$attachElementFromActivity = new AttachElementFromActivity();
+
 	$attachElementFromActivity->set_filter_exclude_attach_items();
+
 }
 
 // require basic functions
