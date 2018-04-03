@@ -33,7 +33,7 @@ class CrudAttachmentItems
 
 	}
 
-	public function item_delete( $de_attach_id )
+	public function item_delete( $detach_id )
 	{
 
 		global $wpdb;
@@ -41,11 +41,11 @@ class CrudAttachmentItems
 		$table_name = $wpdb->prefix . $this->table_name_slug;
 
 		$t = "DELETE FROM $table_name WHERE attach_id='%d'";
-		$query = $wpdb->prepare($t, $de_attach_id);
+		$query = $wpdb->prepare($t, $detach_id);
 		$result = $wpdb->query($query);
 
 		if( $result === false ){
-			die( 'Ошибка БД' );
+			die( 'Error DB!' );
 		}
 
 		return true;

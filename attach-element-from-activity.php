@@ -26,6 +26,9 @@ require_once plugin_dir_path( __FILE__ ) . 'inc/helpers.php';
 // create button
 require_once plugin_dir_path( __FILE__ ) . 'inc/create_attach_button.php';
 
+// require basic functions
+require_once plugin_dir_path( __FILE__ ) . 'inc/basic_function.php';
+
 // main class
 class AttachElementFromActivity
 {
@@ -40,7 +43,7 @@ class AttachElementFromActivity
 		$this->register();
 
 		// watch to the $_POST
-		$this->watch_post();
+		$this->observe_the_elements();
 	}	
 
 	/*******************
@@ -48,8 +51,6 @@ class AttachElementFromActivity
 	********************/
 	// register function
 	public function register() {
-
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ) );
 
@@ -73,6 +74,13 @@ class AttachElementFromActivity
 		wp_enqueue_style( 'attachElementFromActivityStyle', plugins_url( '/assets/css/attachElementFromActivity.css?' . time(), __FILE__ ) );
 
 		wp_enqueue_script( 'attachElementFromActivityScript', plugins_url( '/assets/js/script.js?v=' . time(), __FILE__ ), array( 'jquery' ) );
+
+		wp_localize_script( 'attachElementFromActivityScript', 'ajax_object', array(
+
+			'ajax_url' => admin_url( 'admin-ajax.php' ),
+			'nonce' => wp_create_nonce( 'nonce_attach_request' )
+
+		) );
 
 	}
 
@@ -116,14 +124,43 @@ class AttachElementFromActivity
 
 		<?php }
 
-	public function watch_post()
+	// Attach|Detach element 
+	public function observe_the_elements()
 	{
 
-		$new_class_attach = new AttachButton();
-
-		$new_class_attach->get_post_arr();
+		add_action( 'wp_ajax_attach-element', array( $this, 'attach_func' ) );
 
 	}
+
+		// CRUD
+		function attach_func()
+		{ 
+
+			if( empty( $_POST['nonce'] ) ) wp_die( '0' );
+
+			// If nonce is checked
+			if( wp_verify_nonce( $_POST['nonce'], 'nonce_attach_request' ) ){
+
+				$attach_class = new CrudAttachmentItems();
+
+				if( $_POST['type_attach'] === 'attach' ){
+
+					$attach_class->item_add( $_POST['id_item'] );
+
+				} else if(  $_POST['type_attach'] === 'detach'  ){
+
+					$attach_class->item_delete( $_POST['id_item'] );
+
+				} else{
+
+					die( 'Error!' );
+
+				}
+
+			}
+
+			wp_die();
+		}
 
 }
 
@@ -135,9 +172,6 @@ if ( class_exists( 'AttachElementFromActivity' ) ) {
 	$attachElementFromActivity->set_filter_exclude_attach_items();
 
 }
-
-// require basic functions
-require_once plugin_dir_path( __FILE__ ) . 'inc/basic_function.php';
 
 // activation
 register_activation_hook( __FILE__, array( 'BasicFunctions', 'activate' ) );

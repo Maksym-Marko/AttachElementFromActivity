@@ -15,30 +15,32 @@ class AttachmentItems
 
 		?>
 
-		<?php if ( bp_has_activities( 'display_comments=threaded&show_hidden=true&include=0,' . $array_attachment_elements ) ) : ?>
-
 		<div class="activity" id="attachItemActivityWrap">
 
-			<h2>Закрепленные записи</h2>
-			<ul class="mx-attach_item_activity"><!--activity-list item-list  -->
+			<?php if ( bp_has_activities( 'display_comments=threaded&show_hidden=true&include=0,' . $array_attachment_elements ) ) : ?>
 
-				<?php while ( bp_activities() ) : bp_the_activity(); ?>
+				<h2>Stored records</h2>
 
-					<!--attach-->
-					<?php bp_get_template_part( 'activity/entry' ); ?>
-					
-					<?php
-					/*
-					* If you want to customize attachment elements, you can edit this file. After power on.
-					*/
-					//include('attach_boby.php'); ?>
+				<ul class="mx-attach_item_activity">
 
-				<?php endwhile; ?>
+					<?php while ( bp_activities() ) : bp_the_activity(); ?>
 
-			</ul>
+						<!--attach-->
+						<?php bp_get_template_part( 'activity/entry' ); ?>
+						
+						<?php
+						/*
+						* If you want to customize attachment elements, you can edit this file. After power on.
+						*/
+						//include('attach_boby.php'); ?>
+
+					<?php endwhile; ?>
+			
+				</ul>
+
+			<?php endif; ?>
+
 		</div>
-
-		<?php endif; ?>
 
 	<?php }
 }
