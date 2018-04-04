@@ -71,13 +71,17 @@
     width: 100%;
 }
 
-/*button*/
+/*buttons*/
 .mx-attach_forms_wrap{
 	width: 30px;
 	height: 30px;
 	position: absolute;
 	top: -4px;
 	right: 0px;
+	display: none;
+}
+.directory.activity .mx-attach_forms_wrap{
+	display: block;
 }
 #attachItemActivityWrap .mx-attach_forms_wrap{
     top: 12px;

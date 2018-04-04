@@ -1,8 +1,5 @@
 <?php
 /**
-* @package AttachElementFromActivity
-*/
-/**
  * --This is a copy of-- BuddyPress - Activity Stream (Single Item)
  */
 

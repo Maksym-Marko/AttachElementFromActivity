@@ -1,8 +1,6 @@
 <?php
-/**
-* @package AttachElementFromActivity
-*/
 
+// An array of items that are included in the list of important.
 function mx_list_attachment_items( $table_slug ) {
 
 	global $wpdb;
@@ -14,7 +12,9 @@ function mx_list_attachment_items( $table_slug ) {
 	$array_attachment_elements = array();
 
 	foreach( $attachment_elements as $attach_element ){
+
 		$array_attachment_elements[] = $attach_element->attach_id;
+
 	}
 
 	$array_attachment_elements = implode( ',', $array_attachment_elements );
@@ -23,10 +23,8 @@ function mx_list_attachment_items( $table_slug ) {
 
 }
 
-/**************************
-* filter for activity loop
-***************************/
-function my_bp_activities_exclude_activity_item( $retval ) {
+// Filter for the activity cycle.
+function mx_bp_activities_exclude_activity_item( $retval ) {
 	    
     $exclude_items = mx_list_attachment_items( MX_TABLE_SLUG ); 
 
@@ -35,4 +33,5 @@ function my_bp_activities_exclude_activity_item( $retval ) {
     $retval['exclude'] = $exclude_items_arr;
  
     return $retval;
+    
 }

@@ -1,55 +1,62 @@
 <?php
-/**
-* @package AttachElementFromActivity
-*/
-
 /*
-Plugin Name: Attach an element to an activity
+Plugin Name: Attach an item to the activity stream
 Plugin URI: https://github.com/Maxim-us/AttachElementFromActivity
-Description: Plugin for BuddyPress. Allows you to attachment any item from the activity loop to the beginning. As in Vkontakte.
+Description: Plugin for BuddyPress. Allows you to attachment any item from the activity loop to the beginning.
 Author: Marko Maksym
-Version: 1.1
+Version: 1.0
 Author URI: https://github.com/Maxim-us
 */
 
-defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
+/*
+* The plugin complements the BuddyPress plugin.
+* Before installing, you need to install the buddypress plugin.*
+*/
 
-// slug database table
+defined( 'ABSPATH' ) or die();
+
+// Slug database table.
 const MX_TABLE_SLUG = 'attach_element_activity';
 
-// CRUD file
+// CRUD file.
 require_once plugin_dir_path( __FILE__ ) . 'inc/crud.php';
 
-// helpers
+// Helper functions.
 require_once plugin_dir_path( __FILE__ ) . 'inc/helpers.php';
 
-// create button
+// Create buttons for attaching and detaching elements in the activity stream.
 require_once plugin_dir_path( __FILE__ ) . 'inc/create_attach_button.php';
 
-// require basic functions
+// Includes the main functions to run this plugin.
 require_once plugin_dir_path( __FILE__ ) . 'inc/basic_function.php';
 
-// main class
+// List of attached elements.
+require_once plugin_dir_path( __FILE__ ) . 'inc/body_for_attach_item.php';
+
+// Main class.
 class AttachElementFromActivity
 {
 
 	function __construct() {
 		
+		// Add button.
 		$this->add_button_in_activity_item();
 
-		$this->create_place_begin_activity_loop();
+		// Create a place before the activity cycle.
+		$this->create_place_before_activity_loop();
 
-		// register function
+		// Registration of scripts and styles.
 		$this->register();
 
-		// watch to the $_POST
+		// Look at the $ _POST array.
 		$this->observe_the_elements();
+
 	}	
 
 	/*******************
-	* basic methods
+	* Basic methods.
 	********************/
-	// register function
+	// Register function.
 	public function register() {
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ) );
@@ -57,23 +64,24 @@ class AttachElementFromActivity
 	}
 
 	/**************************
-	* filter for activity loop
+	* Filter for activity loop.
 	***************************/
 	public function set_filter_exclude_attach_items(){
 
-		add_filter( 'bp_after_has_activities_parse_args', 'my_bp_activities_exclude_activity_item' );
+		// Function "mx_bp_activities_exclude_activity_item" located in the "./inc/helpers.php" file.
+		add_filter( 'bp_after_has_activities_parse_args', 'mx_bp_activities_exclude_activity_item' );
 
 	}
 
 	/**********************
-	* functions action
+	* Functions action.
 	***********************/
-	/* add scripts and styles */
+	// Add scripts and styles to the queue.
 	public function enqueue() {
 
-		wp_enqueue_style( 'attachElementFromActivityStyle', plugins_url( '/assets/css/attachElementFromActivity.css?' . time(), __FILE__ ) );
+		wp_enqueue_style( 'attachElementFromActivityStyle', plugins_url( '/assets/css/attachElementFromActivity.css', __FILE__ ) );
 
-		wp_enqueue_script( 'attachElementFromActivityScript', plugins_url( '/assets/js/script.js?v=' . time(), __FILE__ ), array( 'jquery' ) );
+		wp_enqueue_script( 'attachElementFromActivityScript', plugins_url( '/assets/js/script.js', __FILE__ ), array( 'jquery' ) );
 
 		wp_localize_script( 'attachElementFromActivityScript', 'ajax_object', array(
 
@@ -84,25 +92,27 @@ class AttachElementFromActivity
 
 	}
 
-	// add button in activity item
+	// Add a button to an activity item.
 	public function add_button_in_activity_item() {
 
-		add_action('plugins_loaded', function() {
+		add_action( 'plugins_loaded', function() {
 
-		  $user_meta = get_userdata( get_current_user_id() );
+			$user_meta = get_userdata( get_current_user_id() );
 
 			$user_roles = $user_meta->roles;
 
+			// Run BuddyPress hook if the current user is an administrator.
 			if( $user_roles[0] == 'administrator' ){
-			    // BuddyPress hook
+			    
 				add_action( 'bp_activity_entry_meta', array( $this, 'create_attach_button' ), 1 );
+
 			}
 
-		});
+		} );
 		
 	}
 
-		// create button for attach
+		// Create a button to attach.
 		public function create_attach_button() {
 
 			$new_button_attach = new AttachButton();
@@ -110,21 +120,23 @@ class AttachElementFromActivity
 			$new_button_attach->create_form();
 		}
 
-	// create place begin activity loop
-	public function create_place_begin_activity_loop() {
+	// Create a place before the activity cycle.
+	public function create_place_before_activity_loop() {
 
 		add_action( 'bp_before_directory_activity_list', array( $this, 'body_for_attach_item' ), 20 );
 
 	}
 
-		// body fot attach activity item
-		public function body_for_attach_item() { ?>
+		// Place for important activities.
+		public function body_for_attach_item() {			
 
-			<?php require_once plugin_dir_path( __FILE__ ) . 'inc/body_for_attach_item.php'; ?>
+			$get_attachment_items = new AttachmentItems();
+	
+			$get_attachment_items->list_items();
 
-		<?php }
+		}
 
-	// Attach|Detach element 
+	// Attach|Detach element.
 	public function observe_the_elements()
 	{
 
@@ -138,7 +150,7 @@ class AttachElementFromActivity
 
 			if( empty( $_POST['nonce'] ) ) wp_die( '0' );
 
-			// If nonce is checked
+			// If nonce is checked.
 			if( wp_verify_nonce( $_POST['nonce'], 'nonce_attach_request' ) ){
 
 				$attach_class = new CrudAttachmentItems();
@@ -164,7 +176,7 @@ class AttachElementFromActivity
 
 }
 
-// initialize
+// Initialize.
 if ( class_exists( 'AttachElementFromActivity' ) ) {
 
 	$attachElementFromActivity = new AttachElementFromActivity();
@@ -173,11 +185,11 @@ if ( class_exists( 'AttachElementFromActivity' ) ) {
 
 }
 
-// activation
+// Activation.
 register_activation_hook( __FILE__, array( 'BasicFunctions', 'activate' ) );
 
-// deactivation
+// Deactivation.
 register_deactivation_hook( __FILE__, array( 'BasicFunctions', 'deactivate' ) );
 
-// uninstall
+// Uninstall.
 register_uninstall_hook( __FILE__, array( 'BasicFunctions', 'uninstall' ) );

@@ -1,6 +1,6 @@
 <?php
-/**
-* @package AttachElementFromActivity
+/*
+* Class for creating buttons for attaching and detaching an item.
 */
 
 class AttachButton

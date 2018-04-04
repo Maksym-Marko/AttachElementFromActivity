@@ -22,7 +22,7 @@ jQuery(document).ready(function($) {
 				// create wrapper
 				if( $( '#attachItemActivityWrap' ).find( '.mx-attach_item_activity' ).length === 0 ){
 					
-					$( '#attachItemActivityWrap' ).append( '<h2 id="mxTitleAttach">Stored records</h2>' );
+					$( '#attachItemActivityWrap' ).append( '<h2 id="mxTitleAttach">Important posts</h2>' );
 
 					$( '#attachItemActivityWrap' ).append( '<ul class="mx-attach_item_activity"></ul>' );
 
@@ -59,7 +59,6 @@ jQuery(document).ready(function($) {
 
 		});
 
-	} );
-	
+	} );	
 
 });

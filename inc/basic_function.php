@@ -1,8 +1,7 @@
 <?php
-/**
-* @package AttachElementFromActivity
+/*
+* Class for activating, deactivating and removing the plugin.
 */
-
 class BasicFunctions
 {
 
@@ -11,9 +10,10 @@ class BasicFunctions
 	public static function activate()
 	{
 
-		// create table
+		// Create table.
 		global $wpdb;
 
+		// Table name.
 		$table_name = $wpdb->prefix . self::$table_name_slug;
 
 		if ( $wpdb->get_var( "SHOW TABLES LIKE '" . $table_name . "'" ) !=  $table_name ) {
@@ -23,39 +23,47 @@ class BasicFunctions
 					`id` int(11) NOT NULL AUTO_INCREMENT,
 					`attach_id` varchar(40) NOT NULL,
 					PRIMARY KEY (`id`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+				) ENGINE=MyISAM DEFAULT CHARSET=$wpdb->charset AUTO_INCREMENT=1;";
 
 			$wpdb->query( $sql );
 
-			// insert dummy data
-			$wpdb->insert( 
-				$table_name, 
+			// Insert dummy data.
+			$wpdb->insert(
+
+				$table_name,
+
 				array(
-					'attach_id' => 0, 
-				) 
+
+					'attach_id' => 0,
+
+				)
+
 			);
 
 		}
 
-		// rewrite rules
+		// Rewrite rules.
 		flush_rewrite_rules();
+
 	}
 
 	public static function deactivate()
 	{
 
-		// CODE...
-
-		// rewrite rules
+		// Rewrite rules.
 		flush_rewrite_rules();
+
 	}
 
 	public static function uninstall()
 	{
 
-		if ( __FILE__ != WP_UNINSTALL_PLUGIN ) {			
+		if ( __FILE__ != WP_UNINSTALL_PLUGIN ) {
+
 			return;
+			
 		}
 		
 	}
+
 }

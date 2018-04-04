@@ -1,13 +1,15 @@
 <?php
-/**
-* @package AttachElementFromActivity
+/*
+* This is a class that shows the items that you added to the list of important items.
 */
+
 class AttachmentItems
 {
 
+	// Slug of table this plugin.
 	private $table_name_slug = MX_TABLE_SLUG;
 
-	public function listItems()
+	public function list_items()
 	{
 		global $wpdb;
 		
@@ -19,18 +21,18 @@ class AttachmentItems
 
 			<?php if ( bp_has_activities( 'display_comments=threaded&show_hidden=true&include=0,' . $array_attachment_elements ) ) : ?>
 
-				<h2>Stored records</h2>
+				<h2 id="mxTitleAttach">Important posts</h2>
 
 				<ul class="mx-attach_item_activity">
 
 					<?php while ( bp_activities() ) : bp_the_activity(); ?>
-
-						<!--attach-->
+						
 						<?php bp_get_template_part( 'activity/entry' ); ?>
 						
 						<?php
 						/*
 						* If you want to customize attachment elements, you can edit this file. After power on.
+						* But before doing this, disable the code above "bp_get_template_part( 'activity/entry' );"
 						*/
 						//include('attach_boby.php'); ?>
 
@@ -46,10 +48,3 @@ class AttachmentItems
 }
 
 ?>
-
-
-<?php
-	$get_attachment_items = new AttachmentItems();
-	$get_attachment_items->listItems();
-?>
-	
