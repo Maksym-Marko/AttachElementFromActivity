@@ -147,7 +147,7 @@ class AttachElementFromActivity
 
 	}
 
-		// CRUD
+		// CRUD.
 		function attach_func()
 		{ 
 

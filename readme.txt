@@ -1,6 +1,6 @@
 === Attach element from activity ===
 Contributors: markomaksym
-Tags: buddypress, activity, activity Stream, buddypress activity, embed, attach
+Tags: buddypress, activity, activity stream, buddypress activity, embed, attach
 Requires at least: 4.9
 Tested up to: 4.9
 Stable tag: 1.0
@@ -33,11 +33,10 @@ Before installing, you need to install the buddypress plugin.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Click the "Attach an item" button
+2. Item moved upwards
+3. Click the "Detach an item" button
+4. Detaching an item
 
 == Changelog ==
 
