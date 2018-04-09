@@ -3,6 +3,9 @@
 * Class for creating buttons for attaching and detaching an item.
 */
 
+// Exit if accessed directly
+if ( !defined( 'ABSPATH' ) ) exit;
+
 class AttachButton
 {
 
@@ -21,7 +24,7 @@ class AttachButton
 
 				<input type="hidden" name="id_item" value="<?php echo bp_get_activity_id(); ?>" />
 				
-				<button type="submit" class="mx-attach_submit" title="Закрепить" name="<? echo $name_attach_button?>"><i class="fas fa-object-group"></i></button>
+				<button type="submit" class="mx-attach_submit" title="Attach" name="<? echo $name_attach_button?>"><i class="fa fa-object-group"></i></button>
 
 		    </form>
 
@@ -29,7 +32,7 @@ class AttachButton
 
 				<input type="hidden" name="id_item" value="<?php echo bp_get_activity_id(); ?>" />
 				
-				<button type="submit" class="mx-detach_submit" title="Открепить" name="<? echo $name_detach_button?>"><i class="far fa-object-ungroup"></i></button>
+				<button type="submit" class="mx-detach_submit" title="Detach" name="<? echo $name_detach_button?>"><i class="fa fa-object-ungroup"></i></button>
 
 		    </form>
 

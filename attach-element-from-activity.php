@@ -2,7 +2,7 @@
 /*
 Plugin Name: Attach an item to the activity stream
 Plugin URI: https://github.com/Maxim-us/AttachElementFromActivity
-Description: Plugin for BuddyPress. Allows you to attachment any item from the activity loop to the beginning.
+Description: The plugin complements BuddyPress. Allows you to insert an element from the activity cycle to the beginning.
 Author: Marko Maksym
 Version: 1.0
 Author URI: https://github.com/Maxim-us
@@ -10,10 +10,11 @@ Author URI: https://github.com/Maxim-us
 
 /*
 * The plugin complements the BuddyPress plugin.
-* Before installing, you need to install the buddypress plugin.*
+* Before installing, you need to install the buddypress plugin.
 */
 
-defined( 'ABSPATH' ) or die();
+// Exit if accessed directly
+if ( !defined( 'ABSPATH' ) ) exit;
 
 // Slug database table.
 const MX_TABLE_SLUG = 'attach_element_activity';
@@ -78,6 +79,8 @@ class AttachElementFromActivity
 	***********************/
 	// Add scripts and styles to the queue.
 	public function enqueue() {
+
+		wp_enqueue_style( 'load-fa', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' );
 
 		wp_enqueue_style( 'attachElementFromActivityStyle', plugins_url( '/assets/css/attachElementFromActivity.css', __FILE__ ) );
 

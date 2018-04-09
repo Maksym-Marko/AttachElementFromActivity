@@ -3,12 +3,15 @@
 * A class for adding and removing an item identifier in the database.
 */
 
+// Exit if accessed directly
+if ( !defined( 'ABSPATH' ) ) exit;
+
 class CrudAttachmentItems
 {
 
 	private $table_name_slug = MX_TABLE_SLUG;
 	
-	public function item_add( $attach_id )
+	public function item_add( int $attach_id )
 	{
 
 		global $wpdb;

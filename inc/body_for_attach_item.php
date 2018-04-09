@@ -3,6 +3,9 @@
 * This is a class that shows the items that you added to the list of important items.
 */
 
+// Exit if accessed directly
+if ( !defined( 'ABSPATH' ) ) exit;
+
 class AttachmentItems
 {
 
@@ -19,9 +22,7 @@ class AttachmentItems
 
 		<div class="activity" id="attachItemActivityWrap">
 
-			<?php if ( bp_has_activities( 'display_comments=threaded&show_hidden=true&include=0,' . $array_attachment_elements ) ) : ?>
-
-				<h2 id="mxTitleAttach">Important posts</h2>
+			<?php if ( bp_has_activities( 'display_comments=threaded&show_hidden=true&include=0,' . $array_attachment_elements ) ) : ?>				
 
 				<ul class="mx-attach_item_activity">
 

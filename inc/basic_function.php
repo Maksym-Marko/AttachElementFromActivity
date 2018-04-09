@@ -2,6 +2,10 @@
 /*
 * Class for activating, deactivating and removing the plugin.
 */
+
+// Exit if accessed directly
+if ( !defined( 'ABSPATH' ) ) exit;
+
 class BasicFunctions
 {
 

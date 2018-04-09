@@ -20,9 +20,7 @@ jQuery(document).ready(function($) {
 			if( data.type_attach === 'attach' ){
 
 				// create wrapper
-				if( $( '#attachItemActivityWrap' ).find( '.mx-attach_item_activity' ).length === 0 ){
-					
-					$( '#attachItemActivityWrap' ).append( '<h2 id="mxTitleAttach">Important posts</h2>' );
+				if( $( '#attachItemActivityWrap' ).find( '.mx-attach_item_activity' ).length === 0 ){					
 
 					$( '#attachItemActivityWrap' ).append( '<ul class="mx-attach_item_activity"></ul>' );
 

@@ -1,5 +1,8 @@
 <?php
 
+// Exit if accessed directly
+if ( !defined( 'ABSPATH' ) ) exit;
+
 // An array of items that are included in the list of important.
 function mx_list_attachment_items( $table_slug ) {
 

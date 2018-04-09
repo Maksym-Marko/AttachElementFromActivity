@@ -3,6 +3,9 @@
  * --This is a copy of-- BuddyPress - Activity Stream (Single Item)
  */
 
+// Exit if accessed directly
+if ( !defined( 'ABSPATH' ) ) exit;
+
 do_action( 'bp_before_activity_entry' ); ?>
 
 <li class="<?php bp_activity_css_class(); ?>" id="activity-<?php bp_activity_id(); ?>">
