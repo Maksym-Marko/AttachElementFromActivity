@@ -3,7 +3,7 @@
  * --This is a copy of-- BuddyPress - Activity Stream (Single Item)
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( !defined( 'ABSPATH' ) ) exit;
 
 do_action( 'bp_before_activity_entry' ); ?>

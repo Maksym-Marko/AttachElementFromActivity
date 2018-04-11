@@ -9,13 +9,15 @@ jQuery(document).ready(function($) {
 		var id_item = parseInt( $( this ).find( 'input[name="id_item"]' ).val() );
 
 		var data = {
-			'action': 'attach-element',
-			'nonce': ajax_object.nonce,
-			'type_attach': type_attach,
-			'id_item': id_item
+
+			'action'		: 'attach-element',
+			'nonce'			: aitas_ajax_object.nonce,
+			'type_attach'	: type_attach,
+			'id_item'		: id_item
+
 		};
 
-		jQuery.post( ajax_object.ajax_url, data, function( response ) {
+		jQuery.post( aitas_ajax_object.ajax_url, data, function( response ) {
 
 			if( data.type_attach === 'attach' ){
 

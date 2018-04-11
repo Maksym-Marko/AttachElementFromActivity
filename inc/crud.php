@@ -3,15 +3,15 @@
 * A class for adding and removing an item identifier in the database.
 */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class CrudAttachmentItems
+class AitasCrudAttachmentItems
 {
 
 	private $table_name_slug = MX_TABLE_SLUG;
 	
-	public function item_add( int $attach_id )
+	public function aitas_item_add( int $attach_id )
 	{
 
 		global $wpdb;
@@ -42,7 +42,7 @@ class CrudAttachmentItems
 
 	}
 
-	public function item_delete( $detach_id )
+	public function aitas_item_delete( $detach_id )
 	{
 
 		global $wpdb;
@@ -62,6 +62,7 @@ class CrudAttachmentItems
 		}
 
 		return true;
+		
 	}
 
 }

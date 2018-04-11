@@ -1,10 +1,10 @@
 <?php
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( !defined( 'ABSPATH' ) ) exit;
 
 // An array of items that are included in the list of important.
-function mx_list_attachment_items( $table_slug ) {
+function aitas_list_attachment_items( $table_slug ) {
 
 	global $wpdb;
 
@@ -27,11 +27,11 @@ function mx_list_attachment_items( $table_slug ) {
 }
 
 // Filter for the activity cycle.
-function mx_bp_activities_exclude_activity_item( $retval ) {
+function aitas_bp_activities_exclude_activity_item( $retval ) {
 	    
-    $exclude_items = mx_list_attachment_items( MX_TABLE_SLUG ); 
+    $exclude_items = aitas_list_attachment_items( MX_TABLE_SLUG ); 
 
-	$exclude_items_arr = explode(",", $exclude_items);
+	$exclude_items_arr = explode( ",", $exclude_items );
 
     $retval['exclude'] = $exclude_items_arr;
  

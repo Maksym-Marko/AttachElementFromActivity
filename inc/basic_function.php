@@ -3,15 +3,15 @@
 * Class for activating, deactivating and removing the plugin.
 */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class BasicFunctions
+class AitasBasicFunctions
 {
 
 	private static $table_name_slug = MX_TABLE_SLUG;
 
-	public static function activate()
+	public static function aitas_activate()
 	{
 
 		// Create table.
@@ -23,11 +23,11 @@ class BasicFunctions
 		if ( $wpdb->get_var( "SHOW TABLES LIKE '" . $table_name . "'" ) !=  $table_name ) {
 
 			$sql = "CREATE TABLE IF NOT EXISTS `$table_name`
-				(
-					`id` int(11) NOT NULL AUTO_INCREMENT,
-					`attach_id` varchar(40) NOT NULL,
-					PRIMARY KEY (`id`)
-				) ENGINE=MyISAM DEFAULT CHARSET=$wpdb->charset AUTO_INCREMENT=1;";
+			(
+				`id` int(11) NOT NULL AUTO_INCREMENT,
+				`attach_id` varchar(40) NOT NULL,
+				PRIMARY KEY (`id`)
+			) ENGINE=MyISAM DEFAULT CHARSET=$wpdb->charset AUTO_INCREMENT=1;";
 
 			$wpdb->query( $sql );
 
@@ -51,7 +51,7 @@ class BasicFunctions
 
 	}
 
-	public static function deactivate()
+	public static function aitas_deactivate()
 	{
 
 		// Rewrite rules.
@@ -59,7 +59,7 @@ class BasicFunctions
 
 	}
 
-	public static function uninstall()
+	public static function aitas_uninstall()
 	{
 
 		if ( __FILE__ != WP_UNINSTALL_PLUGIN ) {

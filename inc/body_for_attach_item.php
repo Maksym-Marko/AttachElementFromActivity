@@ -3,20 +3,20 @@
 * This is a class that shows the items that you added to the list of important items.
 */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class AttachmentItems
+class AitasAttachmentItems
 {
 
 	// Slug of table this plugin.
 	private $table_name_slug = MX_TABLE_SLUG;
 
-	public function list_items()
+	public function aitas_list_items()
 	{
 		global $wpdb;
 		
-		$array_attachment_elements = mx_list_attachment_items( $this->table_name_slug );
+		$array_attachment_elements = aitas_list_attachment_items( $this->table_name_slug );
 
 		?>
 

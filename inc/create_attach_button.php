@@ -3,13 +3,13 @@
 * Class for creating buttons for attaching and detaching an item.
 */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class AttachButton
+class AitasAttachButton
 {
 
-	public function create_form()
+	public function aitas_create_form()
 	{ 
 
 		$name_attach_button = 'attach-' . bp_get_activity_id();
